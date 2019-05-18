@@ -6,6 +6,7 @@ import (
 	"io"
 	"os"
 	"strconv"
+	"text/tabwriter"
 
 	"github.com/montanaflynn/stats"
 )
@@ -32,14 +33,17 @@ func main() {
 	p95, _ := stats.Percentile(data, 95)
 	p99, _ := stats.Percentile(data, 99)
 
-	fmt.Printf("total: %v\n", len(data))
-	fmt.Printf("min: %v\n", min)
-	fmt.Printf("mean: %v\n", mean)
-	fmt.Printf("max: %v\n", max)
-	fmt.Printf("p50: %v\n", p50)
-	fmt.Printf("p75: %v\n", p75)
-	fmt.Printf("p90: %v\n", p90)
-	fmt.Printf("p95: %v\n", p95)
-	fmt.Printf("p99: %v\n", p99)
+	w := tabwriter.NewWriter(os.Stdout, 0, 1, 2, ' ', tabwriter.TabIndent)
+	// fmt.Fprintln(w, "-----\t-----")
+	fmt.Fprintf(w, "total\t%d\n", len(data))
+	fmt.Fprintf(w, "min\t%.0f\n", min)
+	fmt.Fprintf(w, "mean\t%.0f\n", mean)
+	fmt.Fprintf(w, "max\t%.0f\n", max)
+	fmt.Fprintf(w, "p50\t%.0f\n", p50)
+	fmt.Fprintf(w, "p75\t%.0f\n", p75)
+	fmt.Fprintf(w, "p90\t%.0f\n", p90)
+	fmt.Fprintf(w, "p95\t%.0f\n", p95)
+	fmt.Fprintf(w, "p99\t%.0f\n", p99)
+	w.Flush()
 
 }
