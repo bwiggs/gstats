@@ -1,6 +1,8 @@
 # gstats
 cli tool to read a bunch of numbers from STDIN and dump statistical data about it
 
+**for a more full featured tool, check out `ministat` from the FreeBSD project. Should be available in your package manager of choice.**
+
 ## usage
 
 ```
